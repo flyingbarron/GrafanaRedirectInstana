@@ -1,4 +1,4 @@
-# GrafanaRedirectInstana
+# Grafana redirect to Instana
 A helper function to redirect Grafana drill down links into Instana
 
 The purpose of this function is to extend the Instana plugin for Grafana and add a new feature - drill down from a Grafana graph to the Instana object dashboard.
@@ -41,5 +41,39 @@ The solution assumes that it will receive 3 parameters:
 2. instanaAPIToken - the API token to query the Instana REST API (highly recommended you use a token with limited and read-only access)
 3. fqdn - the FQDN of the host you want to view in Instana
 
-The rest of this 
+The rest of this document will explain how to use this code as an IBM Cloud Function:
+
+### Create an IBM Cloud Function using the UI
+1. Login to `https://cloud.ibm.com/functions/actions` and create a new action by clicking "Create"
+2. Create an entity of type "Action"
+<img width="423" alt="image" src="https://user-images.githubusercontent.com/7903045/136178592-32513272-6f7e-4647-9650-10324e2802d6.png">
+
+3. Create an action with the Python runtime and give it whatever name you want.
+<img width="675" alt="image" src="https://user-images.githubusercontent.com/7903045/136178768-8359f838-587d-4246-a392-ad22851b5245.png">
+
+4. Paste the content of the file (`redirectInstana.py`) into the online editor and save the file.
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/7903045/136179120-07ff36e8-6ab0-4bbb-83d4-3e200170b762.png">
+
+5. In the "Parameters" tab, add the `instanaURL` and `instanaAPIToken` values and save. 
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/7903045/136179427-1188e911-b8df-414c-8060-e27190350d7a.png">
+
+6. In the "Endpoints" tab, click the "Enable as Web Action" checkbox and save. Note/record the value of the public HTTP endpoint
+![image](https://user-images.githubusercontent.com/7903045/136180119-cda6e737-24f3-4e0b-96bd-99ba316e0c4b.png)
+
+At this point you can test your function by running the command:
+```bash
+curl https://<thePublicFunctionEndpoint>.json?fqdn=<Hostname.domain>
+```
+and getting, as a result something like this:
+
+```bash
+{
+  "headers": {
+    "location": "https://<instanaServer>/#/physical/dashboard?snapshotId=<snapshotId>"
+  },
+  "statusCode": 302
+}%
+
+```
+
 
