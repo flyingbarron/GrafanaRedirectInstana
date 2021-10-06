@@ -82,6 +82,6 @@ If you enter the function in your browser (with or without the `.json` suffix), 
 
 Returning to the Grafana dashboard, you can now create a drill down link which will call the function in a new browser tab and open the Instana dashboard on the host.
 
-<img width="751" alt="image" src="https://user-images.githubusercontent.com/7903045/136181886-35364393-8438-4135-89c4-7b20890efe44.png">
+<img width="744" alt="image" src="https://user-images.githubusercontent.com/7903045/136182054-dcf5ed57-4fd4-4923-a9aa-56ca14960a72.png">
 
 
