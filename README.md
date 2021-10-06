@@ -60,7 +60,7 @@ The rest of this document will explain how to use this code as an IBM Cloud Func
 6. In the "Endpoints" tab, click the "Enable as Web Action" checkbox and save. Note/record the value of the public HTTP endpoint
 ![image](https://user-images.githubusercontent.com/7903045/136180119-cda6e737-24f3-4e0b-96bd-99ba316e0c4b.png)
 
-At this point you can test your function by running the command:
+At this point you can test your function by running the command line instruction:
 ```bash
 curl https://<thePublicFunctionEndpoint>.json?fqdn=<Hostname.domain>
 ```
@@ -75,5 +75,13 @@ and getting, as a result something like this:
 }%
 
 ```
+
+> Note that the suffix `.json` was added to the function to display the HTTP response in your CLI window. This is not necessary in a browser.
+
+If you enter the function in your browser (with or without the `.json` suffix), you will be redirected to the same location.
+
+Returning to the Grafana dashboard, you can now create a drill down link which will call the function in a new browser tab and open the Instana dashboard on the host.
+
+<img width="751" alt="image" src="https://user-images.githubusercontent.com/7903045/136181886-35364393-8438-4135-89c4-7b20890efe44.png">
 
 
