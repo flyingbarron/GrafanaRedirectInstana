@@ -21,7 +21,8 @@ You can now edit your widget to add a drill down link:
 
 Scroll to the bottom of the sidebar and click "Add link" in Data links.
 
-![image](https://user-images.githubusercontent.com/7903045/136161610-1c9880a4-43f5-42ec-8c30-15db8c3fb819.png)
+<img src="https://user-images.githubusercontent.com/7903045/136161610-1c9880a4-43f5-42ec-8c30-15db8c3fb819.png" width="300" >
+
 
 What we would like to do now is add a link in the format of `https://<instanaHostURL>/#/physical/dashboard?snapshotId=<snapshotId>`
 
@@ -29,10 +30,16 @@ But as you can see, `snapshotId` is not one of the available fields:
 
 <img width="791" alt="image" src="https://user-images.githubusercontent.com/7903045/136162134-b16b6348-a707-40ed-90cc-bb3a08103ef7.png">
 
-The solution is to create a helper function which will recieve the `series name` (in the case of hosts this is the FQDN), translate that to the most recent snapshotId and redirect the browser to the Instana server.
+The solution is to create a helper function which will recieve the `Series Name` (in the case of hosts this is the FQDN), translate that to the most recent snapshotId and redirect the browser to the Instana server.
 
 The code shared in this repository does this.
 
 ## The solution
 
+The solution assumes that it will receive 3 parameters:
+1. instanaURL - the base URL of the Instana backend (`https://myInstanaserver`)
+2. instanaAPIToken - the API token to query the Instana REST API (highly recommended you use a token with limited and read-only access)
+3. fqdn - the FQDN of the host you want to view in Instana
+
+The rest of this 
 
