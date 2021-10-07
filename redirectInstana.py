@@ -11,12 +11,14 @@ def main(dict):
     baseQueryURL   = "/api/infrastructure-monitoring/snapshots?size=2&"
     dashboardURL = "/#/physical/dashboard?snapshotId="
     headers = {'authorization':'apiToken ' + dict['instanaAPIToken']}
-
+    
+    
+    
     print (dict) 
     try:
         if 'fqdn' in dict:
             fqdn = dict['fqdn']
-            queryURL = baseQueryURL + fqdnQueryURL + fqdn + "\""
+            queryURL = baseQueryURL + "plugin=\"host\"&query=entity.host.fqdn:\"" + fqdn + "\""
 
         elif 'python_name' in dict: # We need to find the precise hostname for this Python app
             pythonAppName = dict['python_name'].split()[0]
