@@ -18,24 +18,12 @@ def main(dict):
         if 'fqdn' in dict:
             fqdn = dict['fqdn']
             queryURL = baseQueryURL + fqdnQueryURL + fqdn + "\""
-            entityResponse = requests.get(instanaURL + queryURL, headers=headers).json()
-    
+
         elif 'python_name' in dict: # We need to find the precise hostname for this Python app
             pythonAppName = dict['python_name'].split()[0]
             fqdn = dict['python_name'].split()[3].replace('"','').replace(')','')
-            queryURL = baseQueryURL + fqdnQueryURL + fqdn + "\""
-            fqdnResponse = requests.get(instanaURL + queryURL, headers=headers).json()
-            fqdnId = fqdnResponse['items'][0]['host']
-            queryURL = baseQueryURL + "plugin=\"pythonRuntimePlatform\"&query=entity.python.app.name:\"" + pythonAppName + "\""
-            entityResponseList = requests.get(instanaURL + queryURL, headers=headers).json()
-            for i in entityResponseList['items']:
-                if i['host'] == fqdnId:
-                    snapshotId = i['snapshotId']
-            return {
-                'headers': { 'location': instanaURL + dashboardURL +  snapshotId },
-                'statusCode': 302
-            }
-    
+            queryURL = baseQueryURL + "plugin=\"pythonRuntimePlatform\"&query=entity.python.app.name:\"" + pythonAppName + "\" AND entity.host.fqdn:\"" + fqdn + "\""
+
         else:
             return {'text':'No valid entity sent to function',
                     'body':'No valid entity sent to function',
@@ -43,6 +31,7 @@ def main(dict):
                     }
                     
         print (queryURL)
+        entityResponse = requests.get(instanaURL + queryURL, headers=headers).json()
         
         if len(entityResponse['items']) == 1:
             snapshotId = entityResponse['items'][0]['snapshotId']
