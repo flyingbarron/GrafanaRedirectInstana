@@ -7,7 +7,7 @@ The purpose of this function is to extend the Instana plugin for Grafana and add
 
 The current problem is that an Instana dashboard URL requires the snapshotId of the object, which is not known by Grafana. The timeseries Grafana collects from Instana only has the object name (FQDN in the case of hosts).
 
-> Note that as of October 2021, this function only works on objects of type `host`
+> Note that as of October 2021, this function only works on entities of type `entity.host` and `entity.python.app`
 
 An example of a dashboard URL is `https://<instanaHostURL>/#/physical/dashboard?snapshotId=<snapshotId>`
 
@@ -84,4 +84,9 @@ Returning to the Grafana dashboard, you can now create a drill down link which w
 
 <img width="744" alt="image" src="https://user-images.githubusercontent.com/7903045/136182054-dcf5ed57-4fd4-4923-a9aa-56ca14960a72.png">
 
+For a VM/host use the format:
+`https://<endpoint>/redirectInstana?fqdn==${__series.name}`
+
+For a Python application use the format:
+`https://<endpoint>/redirectInstana?plugin=python&python_name=${__series.name}`
 
