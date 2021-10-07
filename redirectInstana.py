@@ -8,10 +8,9 @@ def main(dict):
     # Filters for the queryURL
     # - size=2 we actually only expect 1 response but we limit the size to 2 to catch non-unique FQDNs (maybe a query with wildcards, etc...) 
     # - plugin=host we currently limit this function to hosts only. TBD to add other object types
-    baseQueryURL   = "/api/infrastructure-monitoring/snapshots?size=999&"
+    baseQueryURL   = "/api/infrastructure-monitoring/snapshots?size=2&"
     dashboardURL = "/#/physical/dashboard?snapshotId="
     headers = {'authorization':'apiToken ' + dict['instanaAPIToken']}
-    fqdnQueryURL = baseQueryURL + "plugin=\"host\"&query=entity.host.fqdn:\""
 
     print (dict) 
     try:
